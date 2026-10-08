@@ -1,0 +1,9 @@
+{% extends "user/layout.html" %}
+{% block title %}{{ sp.common_name }} · BioQuest{% endblock %}
+{% block content %}
+<a class="muted" href="{{ url_for('user.discoveries') }}">← Discoveries</a>
+<h1>{{ sp.common_name }}</h1>
+<p><i>{{ sp.scientific_name }}</i> <span class="tag {{ sp.status }}">{{ sp.status_text }}</span></p>
+<section class="card"><h3>About</h3><p>{{ sp.description }}</p><h3>Habitat</h3><p>{{ sp.habitat }}</p><h3>Why it matters</h3><p>{{ sp.why_it_matters }}</p></section>
+<section class="card"><h3>Your sightings</h3>{% if mine.c %}<p>Seen <b>{{ mine.c }}</b> time{{ 's' if mine.c != 1 }} · first on {{ mine.f|dt }}</p>{% else %}<p class="muted">Not found yet. Go find one!</p>{% endif %}</section>
+{% endblock %}

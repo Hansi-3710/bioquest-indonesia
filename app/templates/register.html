@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Create account · BioQuest Indonesia{% endblock %}
+{% block body_class %}auth{% endblock %}
+{% block body %}
+<main class="auth-grid">
+  <section class="auth-brand">
+    <h1>Join the<br>survey</h1>
+    <p>Your account lets you collect sightings, earn points and see where wildlife is being found across Indonesia. Your email is stored encrypted and never shown to other people.</p>
+  </section>
+  <section class="auth-card">
+    <h2>Create account</h2>
+    {% include "_flash.html" %}
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Display name<input name="username" value="{{ username or '' }}" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.\-]+" autocomplete="nickname"></label>
+      <label>Email<input type="email" name="email" value="{{ email or '' }}" required autocomplete="email"></label>
+      <label>Password<input type="password" name="password" required minlength="12" maxlength="128" autocomplete="new-password"><small>At least 12 characters. A few random words is a great password.</small></label>
+      <label>Confirm password<input type="password" name="confirm" required autocomplete="new-password"></label>
+      <label class="check"><input type="checkbox" name="age_ok" value="1" required> I am 13 or older, or my parent or teacher has given permission.</label>
+      <button class="btn" type="submit">Create account</button>
+    </form>
+    <p class="muted">Already registered? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+  </section>
+</main>
+{% endblock %}

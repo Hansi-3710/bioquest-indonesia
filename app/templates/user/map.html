@@ -1,0 +1,10 @@
+{% extends "user/layout.html" %}
+{% block title %}Map · BioQuest{% endblock %}
+{% block head %}{% include "_leaflet_head.html" %}{% endblock %}
+{% block content %}
+<h1>Explore Indonesia</h1>
+<div class="row"><button class="chip on" data-scope="all">Verified + mine</button><button class="chip" data-scope="mine">My sightings</button><span class="muted" id="count"></span></div>
+<div id="map" class="map" data-scope="all" role="application" aria-label="Map of sightings in Indonesia"></div>
+<p class="muted">Updates every 15 seconds. Locations of protected species are shown approximately to keep them safe. <span id="updated"></span></p>
+{% endblock %}
+{% block scripts %}{% include "_leaflet_js.html" %}<script src="{{ url_for('static', filename='js/map.js') }}"></script>{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "user/layout.html" %}
+{% block title %}Profile · BioQuest{% endblock %}
+{% block content %}
+<h1>{{ me.username }}</h1>
+<p class="muted">Level {{ s.level }} · {{ s.points }} points</p>
+<h2>Badges</h2>
+<div class="grid3">{% for name, got in s.badges %}<div class="badge {{ '' if got else 'locked' }}"><span aria-hidden="true">{{ '✓' if got else '·' }}</span><b>{{ name }}</b></div>{% endfor %}</div>
+<h2>Privacy</h2>
+<form class="card" method="post" action="{{ url_for('user.toggle_leaderboard') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label class="check"><input type="checkbox" name="optin" value="1" {{ 'checked' if me.leaderboard_optin }}> Show my display name on the leaderboard</label><button class="btn ghost" type="submit">Save</button></form>
+<form class="card" method="post" action="{{ url_for('user.export_my_data') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><p>Download everything we store about you.</p><button class="btn ghost" type="submit">Download my data</button></form>
+<h2>Change password</h2>
+<form class="card" method="post" action="{{ url_for('user.change_password') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Current password<input type="password" name="current" required autocomplete="current-password"></label>
+  <label>New password<input type="password" name="new" required minlength="12" autocomplete="new-password"></label>
+  <label>Confirm new password<input type="password" name="confirm" required autocomplete="new-password"></label><button class="btn" type="submit">Update password</button></form>
+<h2>Delete account</h2>
+<form class="card danger" method="post" action="{{ url_for('user.delete_account') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <p>This permanently deletes your account and every photo and video you uploaded.</p>
+  <label>Type DELETE<input name="confirm" autocomplete="off" required></label><label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+  <button class="btn warn" type="submit">Delete everything</button></form>
+<form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn ghost" type="submit">Sign out</button></form>
+{% endblock %}

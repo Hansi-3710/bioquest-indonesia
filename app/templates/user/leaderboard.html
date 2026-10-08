@@ -1,0 +1,9 @@
+{% extends "user/layout.html" %}
+{% block title %}Leaderboard · BioQuest{% endblock %}
+{% block content %}
+<h1>Leaderboard</h1>
+<p class="muted">Only people who opted in appear here. You can change this on your profile.</p>
+{% if rows %}<table class="card"><thead><tr><th>#</th><th>Explorer</th><th>Points</th><th>Species</th></tr></thead><tbody>
+{% for name, st in rows %}<tr class="{{ 'me' if name == me.username }}"><td>{{ loop.index }}</td><td>{{ name }}</td><td>{{ st.points }}</td><td>{{ st.species }}</td></tr>{% endfor %}</tbody></table>
+{% else %}<p class="card muted">Nobody has joined the leaderboard yet.</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "research/layout.html" %}
+{% block title %}Training data · BioQuest Research{% endblock %}
+{% block content %}
+<h1>Training data</h1>
+<p>Only <b>verified</b> sightings whose contributor ticked the research-use box are counted. Contributors appear as pseudonyms; coordinates are rounded.</p>
+{% if rows %}<table class="card"><thead><tr><th>Species</th><th>Samples</th><th>Toward {{ target }} per species</th></tr></thead><tbody>
+{% for r in rows %}<tr><td>{{ r.common_name }}<br><small><i>{{ r.scientific_name }}</i></small></td><td class="num">{{ r.n }}</td><td><progress max="{{ target }}" value="{{ [r.n, target]|min }}"></progress></td></tr>{% endfor %}</tbody></table>
+<a class="btn" href="{{ url_for('research.export_manifest') }}">Download label manifest (CSV)</a>
+<p class="muted">To export the decrypted image files for training, run <code>python manage.py export-dataset --out ./training_set</code> on the server.</p>
+{% else %}<p class="card muted">No verified, consented sightings yet.</p>{% endif %}
+{% endblock %}

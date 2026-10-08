@@ -1,0 +1,22 @@
+{% extends "user/layout.html" %}
+{% block title %}Home · BioQuest{% endblock %}
+{% block content %}
+<h1>Hi, {{ me.username }}</h1>
+<section class="card level">
+  <div class="row between"><b>Level {{ s.level }}</b><span class="muted">{{ s.points }} points</span></div>
+  <progress max="{{ s.xp_max }}" value="{{ s.xp }}" aria-label="Progress to next level"></progress>
+  <p class="muted">{{ s.xp_max - s.xp }} points to level {{ s.level + 1 }} · {{ s.species }} species · {{ s.observations }} sightings</p>
+</section>
+<a class="btn big" href="{{ url_for('user.capture') }}">Take a photo or video</a>
+<div class="grid2">
+  <a class="btn ghost" href="{{ url_for('user.discoveries') }}">My discoveries</a>
+  <a class="btn ghost" href="{{ url_for('user.map_view') }}">Explore map</a>
+  <a class="btn ghost" href="{{ url_for('user.leaderboard') }}">Leaderboard</a>
+  <a class="btn ghost" href="{{ url_for('user.profile') }}">Badges</a>
+</div>
+<h2>Recent sightings</h2>
+{% if recent %}<div class="thumbs">{% for r in recent %}
+  <figure class="thumb">{% if r.kind == 'image' %}<img src="{{ url_for('api.media', mid=r.media) }}" alt="{{ r.common_name or 'Sighting' }}" loading="lazy">{% else %}<div class="vid">Video</div>{% endif %}
+  <figcaption>{{ r.common_name or 'Not identified yet' }}<span class="tag {{ r.status }}">{{ r.status }}</span></figcaption></figure>{% endfor %}</div>
+{% else %}<p class="card muted">No sightings yet. Take your first photo and it will appear here.</p>{% endif %}
+{% endblock %}

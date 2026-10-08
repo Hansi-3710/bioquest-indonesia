@@ -1,0 +1,29 @@
+{% extends "user/layout.html" %}
+{% block title %}Camera · BioQuest{% endblock %}
+{% block head %}{% include "_leaflet_head.html" %}{% endblock %}
+{% block content %}
+<h1>New sighting</h1>
+<div class="viewfinder" id="vf"><video id="cam" playsinline muted></video><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><p id="vf-hint">Camera is off</p></div>
+<div class="row wrap">
+  <button class="btn" type="button" id="start">Start camera</button>
+  <button class="btn" type="button" id="snap" disabled>Take photo</button>
+  <button class="btn ghost" type="button" id="rec" disabled>Record video</button>
+  <label class="btn ghost file">Choose file<input type="file" id="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" hidden></label>
+</div>
+<div id="preview" class="preview" hidden></div>
+<form id="obs" class="card">
+  <label>What is it?<select id="species"><option value="">Not sure — let researchers identify it</option>
+    {% for s in species %}<option value="{{ s.slug }}">{{ s.common_name }} ({{ s.scientific_name }})</option>{% endfor %}</select></label>
+  <label>Notes (optional)<textarea id="notes" maxlength="500" rows="2" placeholder="What was it doing? Where exactly?"></textarea></label>
+  <fieldset><legend>Location in Indonesia</legend>
+    <div class="row wrap"><button class="btn ghost" type="button" id="geo">Use my location</button><span class="muted">or tap the map</span></div>
+    <div id="pick" class="map small" role="application" aria-label="Pick location"></div>
+    <div class="grid2"><label>Latitude<input id="lat" type="number" step="any" min="-11.5" max="6.5" required></label><label>Longitude<input id="lng" type="number" step="any" min="94.5" max="141.5" required></label></div>
+  </fieldset>
+  <label class="check"><input type="checkbox" id="consent"> Researchers may use this photo to train species-recognition models. (Optional. Your name is never shared.)</label>
+  <p class="muted">Photos are stripped of hidden metadata and everything you upload is stored encrypted.</p>
+  <button class="btn big" type="submit" id="send" disabled>Save sighting</button>
+  <p id="msg" role="status" class="flash hidden"></p>
+</form>
+{% endblock %}
+{% block scripts %}{% include "_leaflet_js.html" %}<script src="{{ url_for('static', filename='js/capture.js') }}"></script>{% endblock %}

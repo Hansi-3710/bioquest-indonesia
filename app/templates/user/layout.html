@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block body_class %}app{% endblock %}
+{% block body %}
+<header class="topbar"><a class="brand" href="{{ url_for('user.home') }}">BioQuest</a><span class="who">{{ me.username }}</span></header>
+<main class="col">{% include "_flash.html" %}{% block content %}{% endblock %}</main>
+<nav class="tabs" aria-label="Main">
+  {% set items = [('user.home','home','Home'),('user.discoveries','book','Discover'),('user.capture','cam','Camera'),('user.map_view','map','Map'),('user.profile','user','Profile')] %}
+  {% for ep, ic, label in items %}<a href="{{ url_for(ep) }}" class="{{ 'on' if request.endpoint == ep else '' }}{{ ' cam' if ic == 'cam' else '' }}"{% if request.endpoint == ep %} aria-current="page"{% endif %}><b>{{ icon(ic) }}</b>{{ label }}</a>{% endfor %}
+</nav>
+{% endblock %}

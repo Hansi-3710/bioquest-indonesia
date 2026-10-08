@@ -1,0 +1,10 @@
+{% extends "user/layout.html" %}
+{% block title %}Discoveries · BioQuest{% endblock %}
+{% block content %}
+<h1>My discoveries</h1>
+<section class="card"><b>{{ s.species }} / {{ species|length }}</b> species found<progress max="{{ species|length }}" value="{{ s.species }}"></progress></section>
+<div class="grid3">{% for sp in species %}
+  <a class="species {{ 'locked' if not sp.n else sp.status }}" href="{{ url_for('user.species', slug=sp.slug) }}">
+    <span class="swatch" aria-hidden="true">{{ '?' if not sp.n else sp.common_name[0] }}</span>
+    <b>{{ sp.common_name if sp.n else '???' }}</b><small>{{ (sp.first_seen|dt) if sp.n else 'Locked' }}</small></a>{% endfor %}</div>
+{% endblock %}

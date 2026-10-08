@@ -1,0 +1,23 @@
+{% extends "research/layout.html" %}
+{% block title %}Review · BioQuest Research{% endblock %}
+{% block content %}
+<h1>Review queue</h1>
+<div class="row">{% for st in ['pending','verified','rejected'] %}<a class="chip {{ 'on' if st == status }}" href="{{ url_for('research.review', status=st) }}">{{ st }}</a>{% endfor %}</div>
+<div id="queue">
+{% for it in items %}{% set r = it.r %}
+<article class="review card" data-id="{{ r.public_id }}">
+  <div class="media">{% if r.kind == 'image' %}<img src="{{ url_for('api.media', mid=r.media) }}" alt="Sighting {{ r.public_id[:6] }}" loading="lazy">{% else %}<video src="{{ url_for('api.media', mid=r.media) }}" controls playsinline preload="metadata"></video>{% endif %}</div>
+  <div class="detail">
+    <p><b>{{ r.claimed or 'No species chosen' }}</b> <span class="tag {{ r.status }}">{{ r.status }}</span>{% if r.consent_research %} <span class="tag consent">training OK</span>{% endif %}</p>
+    <p class="muted">{{ r.created_at|dt }} · contributor {{ it.who }} · {{ '%.4f'|format(it.loc.lat) }}, {{ '%.4f'|format(it.loc.lng) }}</p>
+    {% if it.notes %}<p class="note">{{ it.notes }}</p>{% endif %}
+    <label>Confirmed species<select class="pick"><option value="">{{ 'Keep contributor\'s choice' if r.claimed else 'Choose…' }}</option>
+      {% for s in species %}<option value="{{ s.slug }}" {{ 'selected' if s.slug == r.final_slug }}>{{ s.common_name }}</option>{% endfor %}</select></label>
+    <div class="row"><button class="btn" data-action="verify">Verify</button><button class="btn warn" data-action="reject">Reject</button>{% if status != 'pending' %}<button class="btn ghost" data-action="reopen">Reopen</button>{% endif %}</div>
+    <p class="msg muted" role="status"></p>
+  </div>
+</article>
+{% else %}<p class="card muted">Nothing here.</p>{% endfor %}
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/review.js') }}"></script>{% endblock %}

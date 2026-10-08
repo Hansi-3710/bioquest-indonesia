@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body_class %}research{% endblock %}
+{% block body %}
+<aside class="side"><a class="brand" href="{{ url_for('research.overview') }}">BioQuest<small>Research</small></a>
+  <nav aria-label="Research">
+    {% for ep, label in [('research.overview','Overview'),('research.review','Review queue'),('research.map_view','Map'),('research.dataset','Training data')] %}
+    <a href="{{ url_for(ep) }}" class="{{ 'on' if request.endpoint == ep }}"{% if request.endpoint == ep %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+  </nav>
+  <form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="link" type="submit">Sign out ({{ me.username }})</button></form></aside>
+<main class="wide">{% include "_flash.html" %}{% block content %}{% endblock %}</main>
+{% endblock %}

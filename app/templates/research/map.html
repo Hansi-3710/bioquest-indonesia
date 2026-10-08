@@ -1,0 +1,8 @@
+{% extends "research/layout.html" %}
+{% block title %}Map · BioQuest Research{% endblock %}
+{% block head %}{% include "_leaflet_head.html" %}{% endblock %}
+{% block content %}
+<h1>Live map</h1><p class="muted"><span id="count"></span> sightings, exact locations. <span id="updated"></span></p>
+<div id="map" class="map tall" data-scope="all" role="application" aria-label="Map of all sightings"></div>
+{% endblock %}
+{% block scripts %}{% include "_leaflet_js.html" %}<script src="{{ url_for('static', filename='js/map.js') }}"></script>{% endblock %}

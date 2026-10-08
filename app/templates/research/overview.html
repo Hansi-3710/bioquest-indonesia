@@ -1,0 +1,16 @@
+{% extends "research/layout.html" %}
+{% block title %}Overview · BioQuest Research{% endblock %}
+{% block content %}
+<h1>Overview</h1>
+<div class="stats">
+  <div class="stat"><b>{{ c.total }}</b>sightings<small>{{ c.week }} this week</small></div>
+  <div class="stat"><b>{{ c.pending }}</b>awaiting review</div>
+  <div class="stat"><b>{{ c.verified }}</b>verified<small>{{ c.consented }} cleared for training</small></div>
+  <div class="stat"><b>{{ c.users }}</b>contributors</div>
+  <div class="stat"><b>{{ c.images }} / {{ c.videos }}</b>photos / videos</div>
+  <div class="stat"><b>{{ c.rejected }}</b>rejected</div>
+</div>
+<h2>Most-reported species</h2>
+{% if top %}<table class="card"><tbody>{% for t in top %}<tr><td>{{ t.common_name }}</td><td class="num">{{ t.n }}</td></tr>{% endfor %}</tbody></table>{% else %}<p class="card muted">No sightings yet.</p>{% endif %}
+{% if c.pending %}<a class="btn" href="{{ url_for('research.review') }}">Review {{ c.pending }} pending</a>{% endif %}
+{% endblock %}
