@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0F5F3D">
+<meta name="referrer" content="no-referrer">
+<title>BioQuest Indonesia</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div id="shell">
+  <main id="screen" tabindex="-1" aria-live="polite"></main>
+  <nav id="nav" aria-label="Main" hidden></nav>
+</div>
+<div id="toast" role="status" hidden></div>
+<input type="file" id="fileCam" class="sr" accept="image/*" capture="environment" tabindex="-1" aria-hidden="true">
+<input type="file" id="fileGal" class="sr" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" multiple tabindex="-1" aria-hidden="true">
+<dialog id="dlg"></dialog>
+<noscript><p style="padding:24px;font-family:sans-serif">BioQuest needs JavaScript to run.</p></noscript>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Secrets: NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Encrypted uploads and trained models live outside git
+storage/
+tmp/
+
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+*.onnx
+*.log
+.DS_Store
+coverage/
