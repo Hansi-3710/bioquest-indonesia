@@ -1,0 +1,42 @@
+{
+  "name": "bioquest-indonesia",
+  "version": "1.0.0",
+  "description": "Citizen-science biodiversity app for Indonesia with a secure research dashboard and model-training pipeline.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "setup": "node scripts/gen-secrets.js",
+    "migrate": "node scripts/migrate.js",
+    "create-researcher": "node scripts/create-researcher.js",
+    "audit:verify": "node scripts/verify-audit.js",
+    "rotate-key": "node scripts/rotate-media-key.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "argon2": "^0.45.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.22.3",
+    "express-rate-limit": "^8.7.1",
+    "file-type": "^22.1.1",
+    "helmet": "^8.3.0",
+    "multer": "^2.4.0",
+    "otplib": "^13.5.0",
+    "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.5"
+  },
+  "optionalDependencies": {
+    "onnxruntime-node": "^1.30.0"
+  },
+  "devDependencies": {
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0"
+  }
+}
