@@ -62,3 +62,35 @@ label.field{display:block;margin-bottom:14px;font-weight:500;font-size:14px}
 .bar>i{display:block;height:100%;background:var(--forest);border-radius:9px;transition:width .6s}
 .spinner{width:56px;height:56px;border:6px solid var(--line);border-top-color:var(--forest);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto}
 @keyframes spin{to{transform:rotate(360deg)}}
+:root {
+  color-scheme: light;
+  --forest: #198754;
+  --leaf: #2F9E63;
+  --mint: #E8F5EC;
+  --paper: #FFFFFF;
+  --card: #FFFFFF;
+  --ink: #17352A;
+  --mute: #52665C;
+  --line: #DCE8E0;
+}
+
+body {
+  background: #FFFFFF;
+  color: var(--ink);
+}
+
+.btn {
+  background: #198754;
+  color: #FFFFFF !important;
+}
+
+.btn.alt {
+  background: #FFFFFF;
+  color: #198754 !important;
+  border: 1.5px solid #198754;
+}
+
+.btn.danger {
+  background: #B3261E;
+  color: #FFFFFF !important;
+}

@@ -75,3 +75,95 @@ tr.me td{background:var(--mint);font-weight:700}
 .dots span.on{background:var(--forest)}
 dialog{border:0;border-radius:18px;padding:20px;max-width:min(92vw,400px);background:var(--card);color:var(--ink);box-shadow:0 20px 60px #0008}
 dialog::backdrop{background:#0b2a2fa8}
+/* Responsive desktop and mobile layout overrides */
+body {
+  display: block;
+  justify-content: initial;
+  background: #FFFFFF;
+}
+
+#shell {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: #FFFFFF;
+}
+
+#screen {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 28px 110px;
+}
+
+#nav {
+  width: 100%;
+  max-width: none;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+}
+
+#nav button {
+  color: #52665C;
+}
+
+#nav button.on {
+  color: #198754;
+}
+
+#nav .cam span {
+  background: #198754;
+  color: #FFFFFF !important;
+}
+
+@media (min-width: 900px) {
+  #screen {
+    padding: 32px 48px 48px;
+  }
+
+  .grid {
+    gap: 18px;
+  }
+
+  .card {
+    padding: 22px;
+    border: 1px solid #E1EAE4;
+    box-shadow: 0 3px 14px #17352A0A;
+  }
+
+  #nav {
+    position: static;
+    border-top: 1px solid #DCE8E0;
+    padding: 12px 24px;
+  }
+
+  #nav button {
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  #nav .cam span {
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-top: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 899px) {
+  #screen {
+    padding: 16px 18px 100px;
+  }
+
+  #nav {
+    position: fixed;
+    bottom: 0;
+  }
+}
