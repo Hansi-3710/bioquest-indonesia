@@ -1,3 +1,4 @@
+
 import pg from 'pg';
 import { config } from './config.js';
 
@@ -9,7 +10,7 @@ export const pool = new pg.Pool({
   max: 10,
   idleTimeoutMillis: 30_000,
   statement_timeout: 15_000,
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : undefined
+  ssl: { rejectUnauthorized: false }
 });
 
 /** Run `fn(client)` in a transaction with the caller's identity attached, so
